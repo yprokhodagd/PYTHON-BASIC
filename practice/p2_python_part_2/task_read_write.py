@@ -15,17 +15,17 @@ Example:
 """
 
 
-def readwrite():
-    files = ['file_1.txt', 'file_2.txt', 'file_3.txt']
-    output = ""
-    for file in files:
+def readwrite(input_files, output_file):
+    output = []
+    for file in input_files:
         with open(file, 'r') as f:
             data = f.read()
             output.append(data)
     output = ", ".join(output)
 
-    with open('result.txt', 'w') as f:
-        f.write(output)
+    output_file.write(str.encode(output))
 
 
-readwrite()
+if __name__ == "__main__":
+    pass
+    # readwrite(['file_1.txt', 'file_2.txt', 'file_3.txt'], 'result.txt')

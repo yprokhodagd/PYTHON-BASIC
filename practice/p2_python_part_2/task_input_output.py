@@ -31,5 +31,3 @@ def read_numbers(n: int) -> str:
         return f'Avg: {round(x,2)}'
     else:
         return "No numbers entered"
-
-read_numbers(5)

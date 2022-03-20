@@ -1,4 +1,3 @@
-# """
 # Write a function which divides x by y.
 # If y == 0 it should print "Division by 0" and return None
 # elif y == 1 it should raise custom Exception with "Deletion on 1 get the same result" text
@@ -13,11 +12,10 @@
 #     >>> division(2, 2)
 #     1
 #     Division finished
-# """
 import typing
 
 
-def division(x: int, y: int) -> typing.Union[None, int]:
+def division(x: int, y: int):
     try:
         if y == 0:
             print("Division by 0")
@@ -29,7 +27,6 @@ def division(x: int, y: int) -> typing.Union[None, int]:
     finally:
         print("Division finished")
 
-
-division(1, 0)
-division(1, 1)
-division(2, 2)
+# division(1, 0)
+# division(1, 1)
+# division(2, 2)
