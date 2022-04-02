@@ -6,10 +6,16 @@ Examples:
      200, 'response data'
 """
 from typing import Tuple
+from unittest.mock import Mock
+from urllib.request import urlopen
 
 
 def make_request(url: str) -> Tuple[int, str]:
-    ...
+    with urlopen(url) as response:
+        res = response.read()
+        response_status = response.status
+        response_data = res.decode("utf-8")
+        return response_status, response_data
 
 
 """
@@ -24,3 +30,9 @@ Example:
     >>> m.method2()
     b'some text'
 """
+
+
+def test_make_request():
+    m = Mock()
+    m.make_request.return_value = 200, 'response data'
+    assert m.make_request() == (200, 'response data')
