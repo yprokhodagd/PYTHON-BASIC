@@ -124,13 +124,32 @@ class CU:
                             required=False)
 
         args = parser.parse_args(argv)
+
         self.path_to_save_files = args.path_to_save_files
-        self.files_count = int(args.file_count)
+
+        if args.file_count:
+            self.files_count = int(args.file_count)
+        else:
+            self.files_count = int(config['DEFAULT']['file_count'])
+
         self.file_name = args.file_name
-        self.prefix = args.prefix
-        self.data_lines = int(args.data_lines)
+
+        if args.prefix:
+            self.prefix = args.prefix
+        else:
+            self.prefix = config['DEFAULT']['prefix']
+
+        if args.data_lines:
+            self.data_lines = int(args.data_lines)
+        else:
+            self.data_lines = int(config['DEFAULT']['data_lines'])
+
+        if args.data_schema:
+            self.data_schema = args.data_schema
+        else:
+            self.data_schema = config['DEFAULT']['data_schema']
+
         self.clear_path = args.clear_path
-        self.data_schema = args.data_schema
         self.processes_number = int(args.multiprocessing_)
 
     def check_files_count(self):
@@ -180,6 +199,7 @@ class CU:
 
         if prefix == "count":
             self.files = [Path(self.path_to_save_files, f"{self.file_name}_{i}.json") for i in range(file_count)]
+            print(self.files)
         elif prefix == "random":
             self.files = [Path(self.path_to_save_files,
                                f"{self.file_name}_{choice('abcde')}{randint(0, self.files_count)}{i}.json") for i in
@@ -248,7 +268,7 @@ if __name__ == '__main__':
         "--file_count", "2",
         "--clear_path",
         "--path_to_save_files", "output/",
-        "--file_name", "set_arg",
+        "--file_name", "file",
         "--prefix", "random",
         "--data_lines", "10",
         "--multiprocessing", "5",
